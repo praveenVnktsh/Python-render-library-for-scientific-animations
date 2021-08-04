@@ -1,10 +1,21 @@
 
 
-from utils import scaleAndShow
 import cv2
 import numpy
 
-
+def scaleAndShow(im, name = 'window', height = None, waitKey = 1):
+    def callback(event,x,y,flags,param):
+        if event == cv2.EVENT_LBUTTONDOWN:
+            print(x, y, im[y, x])
+    
+    cv2.namedWindow(name)
+    cv2.setMouseCallback(name,callback)
+    if height is not None:
+        width = int(im.shape[1]*height/im.shape[0])
+        im = cv2.resize(im, (width, height), interpolation= cv2.INTER_NEAREST)
+    cv2.imshow(name, im)
+    if cv2.waitKey(waitKey) == ord('q'):
+        exit()
 class Renderer():
 
 
