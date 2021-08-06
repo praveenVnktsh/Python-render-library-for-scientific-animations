@@ -57,15 +57,18 @@ obj.plot() # plotting
 ```
 ### Demo
 
-Pendulum simulation with non linear ODE solution
+#### Pendulum simulation with non linear ODE solution
+
 ![Pendulum](readme/output.gif)
 
 
-Falling object simulation
+#### Falling object simulation
+
 ![Falling object](readme/obj.gif)
 
 
-Drawing a simple circle
+#### Drawing a simple circle
+
 ![Circle](readme/circle.gif)
 
 
