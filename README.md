@@ -21,11 +21,11 @@ class Object(Renderer):
         super().__init__(recordLocation = recordLocation)
         self.its = 0
 
-    def draw(self, imag):
+    def draw(self, image):
         '''
         fill in your drawing function here. Use opencv primitives to modify the image array
         '''
-        pass
+        return image
 
     def getInfo(self):
         '''
