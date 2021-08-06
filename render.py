@@ -3,7 +3,7 @@
 import cv2
 import numpy
 import matplotlib.pyplot as plt
-
+import os
 def scaleAndShow(im, name = 'window', height = None, waitKey = 1):
     def callback(event,x,y,flags,param):
         if event == cv2.EVENT_LBUTTONDOWN:
@@ -22,10 +22,13 @@ def scaleAndShow(im, name = 'window', height = None, waitKey = 1):
 class Renderer():
 
 
-    def __init__(self, height = 600, width = 600 ):
+    def __init__(self, height = 600, width = 600, recordLocation = None ):
         shape = (height, width, 3)
         self.height = height
         self.width = width
+        if recordLocation is not None:
+            self.writer = cv2.VideoWriter(recordLocation, cv2.VideoWriter_fourcc(*'XVID'), 25, (width, height))
+
 
         self.origImage = numpy.ones(shape, dtype=numpy.uint8) * 255
 
@@ -46,6 +49,9 @@ class Renderer():
         image = self.draw(image)
 
         image = self.putText(image, self.getInfo())
+
+        if self.writer is not None:
+            self.writer.write(image)
         scaleAndShow(image, height= height, waitKey = pause)
         return image
 

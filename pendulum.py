@@ -6,19 +6,20 @@ from scipy.integrate import odeint
 import scipy
 
 class Pendulum(Renderer):
-    def __init__(self,):
-        super().__init__()
+    def __init__(self, recordLocation = None):
+        super().__init__(recordLocation = recordLocation)
         self.ode = scipy.integrate.ode(self.dynamics).set_integrator('vode', nsteps=500, method='bdf')
         self.its = 0
         self.omega = 0
         self.theta = np.pi/2
-        self.points = set()
+        self.points = []
         self.l = 100
 
     def getInfo(self):
         info = {
             'omega' : round(self.omega, 4),
             'theta' : round(self.theta, 4),
+            'time' : round(self.ode.t, 4)
         }
         return info
     
@@ -31,18 +32,20 @@ class Pendulum(Renderer):
 
     def plot(self):
         data = np.array(list(self.points))
-        plt.scatter(data[:, 0], data[:, 1])
+        plt.plot(data[:, 1])
+        plt.figure()
+        plt.plot(data[:, 0])
         plt.show()
 
     def step(self, dt):
         state = [self.theta, self.omega]
 
-        self.ode.set_initial_value(state, self.ode.t)
+        self.ode.set_initial_value(state, 0)
         self.theta, self.omega = self.ode.integrate(self.ode.t + dt) 
 
         self.its += 1
         if self.its % 1 == 0:
-            self.points.add((300 + self.l * np.cos(self.theta + np.pi/2), 300 + self.l * np.sin(self.theta +np.pi/2)))
+            self.points.append((self.omega, self.theta))
 
         
 
@@ -60,11 +63,12 @@ class Pendulum(Renderer):
 
 
 
-obj = Pendulum()    
+obj = Pendulum(recordLocation= 'output.mp4')    
 
 for i in range(3000):
     obj.step(0.01)
-    obj.render(height= 600, pause = 1)
+    if i % 10 == 0:
+        obj.render(height= 600, pause = 1)
 
 
 obj.plot()
