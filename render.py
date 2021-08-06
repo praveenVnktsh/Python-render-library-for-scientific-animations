@@ -2,6 +2,7 @@
 
 import cv2
 import numpy
+import matplotlib.pyplot as plt
 
 def scaleAndShow(im, name = 'window', height = None, waitKey = 1):
     def callback(event,x,y,flags,param):
@@ -16,11 +17,15 @@ def scaleAndShow(im, name = 'window', height = None, waitKey = 1):
     cv2.imshow(name, im)
     if cv2.waitKey(waitKey) == ord('q'):
         exit()
+
+
 class Renderer():
 
 
     def __init__(self, height = 600, width = 600 ):
         shape = (height, width, 3)
+        self.height = height
+        self.width = width
 
         self.origImage = numpy.ones(shape, dtype=numpy.uint8) * 255
 
