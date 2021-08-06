@@ -25,7 +25,7 @@ class Object(Renderer):
         '''
         fill in your drawing function here. Use opencv primitives to modify the image array
         '''
-        pass
+        return image
 
     def getInfo(self):
         '''
