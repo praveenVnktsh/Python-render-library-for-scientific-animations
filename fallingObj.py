@@ -4,8 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class Object(Renderer):
-    def __init__(self,):
-        super().__init__()
+    def __init__(self, recordLocation = None):
+        super().__init__(recordLocation = recordLocation)
         self.its = 0
         self.x = 300
         self.y = 30
@@ -62,11 +62,12 @@ class Object(Renderer):
 
 
 
-obj = Object()    
+obj = Object(recordLocation = 'obj.mp4')    
 
 for i in range(3000):
     obj.step(0.01)
-    obj.render(height= 600, pause = 1)
+    if i % 10== 0:
+        obj.render(height= 600, pause = 1)
 
 
 obj.plot()

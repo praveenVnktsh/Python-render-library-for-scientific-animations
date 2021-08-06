@@ -63,7 +63,7 @@ class Pendulum(Renderer):
 
 
 
-obj = Pendulum(recordLocation= 'output.mp4')    
+obj = Pendulum(recordLocation= 'pendu.mp4')    
 
 for i in range(3000):
     obj.step(0.01)

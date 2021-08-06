@@ -55,8 +55,18 @@ for i in range(3000):
 
 obj.plot() # plotting
 ```
-### Demo - Pendulum
-![Pendulum](output.gif)
+### Demo
+
+Pendulum simulation with non linear ODE solution
+![Pendulum](readme/output.gif)
+
+
+Falling object simulation
+![Falling object](readme/obj.gif)
+
+
+Drawing a simple circle
+![Circle](readme/circle.gif)
 
 
 
