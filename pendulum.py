@@ -26,7 +26,7 @@ class Pendulum(Renderer):
     def dynamics(self, t, y):
         g = 9.8
         l = 5
-        b= 1
+        b= 0.1
         theta, omega  = y
         dydt = [omega , -(g/l)*np.sin(theta) - b*omega]
         return dydt
@@ -69,7 +69,7 @@ obj = Pendulum()
 for i in range(3000):
     obj.step(0.01)
     if i % 10 == 0:
-        obj.render(height= 600, pause = 1)
+        obj.render(height= 600, pause = 10)
 
 
 obj.plot()
