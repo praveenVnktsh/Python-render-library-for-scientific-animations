@@ -26,8 +26,9 @@ class Pendulum(Renderer):
     def dynamics(self, t, y):
         g = 9.8
         l = 5
+        b= 1
         theta, omega  = y
-        dydt = [omega , -(g/l)*np.sin(theta)]
+        dydt = [omega , -(g/l)*np.sin(theta) - b*omega]
         return dydt
 
     def plot(self):
@@ -40,7 +41,7 @@ class Pendulum(Renderer):
     def step(self, dt):
         state = [self.theta, self.omega]
 
-        self.ode.set_initial_value(state, 0)
+        self.ode.set_initial_value(state, self.ode.t)
         self.theta, self.omega = self.ode.integrate(self.ode.t + dt) 
 
         self.its += 1
@@ -63,7 +64,7 @@ class Pendulum(Renderer):
 
 
 
-obj = Pendulum(recordLocation= 'pendu.mp4')    
+obj = Pendulum()    
 
 for i in range(3000):
     obj.step(0.01)

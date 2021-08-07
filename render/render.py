@@ -26,6 +26,7 @@ class Renderer():
         shape = (height, width, 3)
         self.height = height
         self.width = width
+        self.writer = None
         if recordLocation is not None:
             self.writer = cv2.VideoWriter(recordLocation, cv2.VideoWriter_fourcc(*'XVID'), 25, (width, height))
 
